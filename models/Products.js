@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Decimal128 } = require("mongoose");
 
 const ProductSchema = Schema({
   name: {
@@ -7,9 +7,33 @@ const ProductSchema = Schema({
     trim: true,
   },
 
+  description: {
+    type: String,
+    trim: true,
+  },
+
+  price: {
+    type: Decimal128,
+  },
+
+  pictureUrl: {
+    type: String,
+    trim: true,
+  },
+
   created: {
     type: Date,
     default: Date.now(),
+  },
+
+  productTypeId: {
+    type: Schema.Types.ObjectId,
+    ref: "ProductType",
+  },
+
+  productBrandId: {
+    type: Schema.Types.ObjectId,
+    ref: "ProductBrand",
   },
 });
 
