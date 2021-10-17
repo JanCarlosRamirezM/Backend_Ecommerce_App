@@ -2,7 +2,7 @@ const { request, response } = require("express");
 const productsHelpers = require("../helpers/productsHelpers");
 const Products = require("../models/Products");
 
-exports.CreateProduct = async (req = request, res = response) => {
+exports.CreateProduct = (req = request, res = response) => {
   try {
     const { name } = req.body;
     const product = new Products({ name });

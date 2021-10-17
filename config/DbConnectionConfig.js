@@ -1,5 +1,6 @@
 require("dotenv").config({ path: "../development.env" });
 const mongoose = require("mongoose");
+const { addingSendData } = require("../SendData/addingSendData");
 
 const DbConnectionConfig = async () => {
   try {
@@ -8,6 +9,9 @@ const DbConnectionConfig = async () => {
       useUnifiedTopology: true,
     });
     console.log("Database Connected App ");
+    
+    // Agregar Data a las tablas
+    // addingSendData();
   } catch (error) {
     console.log(error);
     process.exit(1);

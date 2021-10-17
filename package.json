@@ -11,8 +11,8 @@
     "type": "git",
     "url": "git+https://github.com/JanCarlosRamirezM/Backend_Ecommerce_App.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["Nodejs", "Express","MongoDb","React"],
+  "author": "JanCarlosRamirez",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/JanCarlosRamirezM/Backend_Ecommerce_App/issues"
