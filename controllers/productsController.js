@@ -29,7 +29,7 @@ exports.GetProducts = async (req = request, res = response) => {
   }
 };
 
-exports.GetProduct = async (req = request, res = response) => {
+exports.GetProductbyId = async (req = request, res = response) => {
   try {
     const { id } = req.params;
 
