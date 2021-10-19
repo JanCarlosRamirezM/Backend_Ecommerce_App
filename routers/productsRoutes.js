@@ -10,6 +10,6 @@ router.post("/", productsController.CreateProduct);
 router.get("/", productsController.GetProducts);
 
 // api/products
-router.get("/:id", productsController.GetProduct);
+router.get("/:id", productsController.GetProductbyId);
 
 module.exports = router;
