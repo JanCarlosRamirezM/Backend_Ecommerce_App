@@ -29,11 +29,13 @@ const ProductSchema = Schema({
   productTypeId: {
     type: Schema.Types.ObjectId,
     ref: "ProductType",
+    required: true,
   },
 
   productBrandId: {
     type: Schema.Types.ObjectId,
     ref: "ProductBrand",
+    required: true,
   },
 });
 
