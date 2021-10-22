@@ -21,13 +21,13 @@ router.post(
 //GET: api/productsTypes
 router.get("/", productsTypesController.GetProductsTypes);
 
-//GET: api/productsTypes/616b754a21adb5b0da786941
+//GET: api/productsTypes/id
 router.get("/:id", productsTypesController.GetProductTypeById);
 
-//DELETE: api/productsTypes/616b754a21adb5b0da786941
+//DELETE: api/productsTypes/id
 router.delete("/:id", productsTypesController.DeleteProductType);
 
-//PUT: api/productsTypes/UpdateProductType
+//PUT: api/productsTypes/id
 router.put("/:id", productsTypesController.UpdateProductType);
 
 module.exports = router;
