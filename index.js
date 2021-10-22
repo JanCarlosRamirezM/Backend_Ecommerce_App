@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 // Rutas de la app
 app.use("/api/products", require("./routers/productsRoutes"));
 app.use("/api/productsTypes", require("./routers/productsTypesRoutes"));
+app.use("/api/productsBrands", require("./routers/productsBrandsRoutes"));
 
 // Arrancar la App
 app.listen(PORT, () => {

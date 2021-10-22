@@ -10,7 +10,7 @@ exports.getProductTypeById = async (id) => {
 
     return { productType };
   } catch (error) {
-    console.log();
+    console.log(error);
     return "Hubo un error en el server";
   }
 };
