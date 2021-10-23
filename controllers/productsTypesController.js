@@ -34,44 +34,19 @@ exports.GetProductsTypes = async (req = request, res = response) => {
 };
 
 exports.GetProductTypeById = async (req = request, res = response) => {
-  try {
-    const { id } = req.params;
-
-    const productTypeResp = await productsTypesHelpers.getProductTypeById(id);
-
-    if (!productTypeResp.productType) {
-      return res.status(400).json({
-        msg: productTypeResp,
-      });
-    }
-
-    const { productType } = productTypeResp;
-    return res.status(200).json(productType);
-  } catch (error) {
-    console.log(error);
-    return res.status(400).json({
-      msg: "Hubo un error en el server",
-    });
-  }
+  return res.status(200).json(req.productType);
 };
 
 exports.UpdateProductType = async (req = request, res = response) => {
   try {
-    const { id } = req.params;
-    const productTypeResp = await productsTypesHelpers.getProductTypeById(id);
-
-    if (!productTypeResp.productType) {
-      return res.status(400).json({
-        msg: productTypeResp,
-      });
-    }
+    const { _id } = req.productType;
 
     const updateProductType = {
       name: req.body.name,
     };
 
     const productType = await ProductType.findByIdAndUpdate(
-      id,
+      _id,
       updateProductType,
       {
         new: true,
@@ -89,17 +64,9 @@ exports.UpdateProductType = async (req = request, res = response) => {
 
 exports.DeleteProductType = async (req = request, res = response) => {
   try {
-    const { id } = req.params;
+    const { _id } = req.productType;
 
-    const productTypeResp = await productsTypesHelpers.getProductTypeById(id);
-
-    if (!productTypeResp.productType) {
-      return res.status(400).json({
-        msg: productTypeResp,
-      });
-    }
-
-    await ProductType.findByIdAndDelete(id);
+    await ProductType.findByIdAndDelete(_id);
 
     return res.status(200).json({ msg: "Tipo de producto eliminado" });
   } catch (error) {

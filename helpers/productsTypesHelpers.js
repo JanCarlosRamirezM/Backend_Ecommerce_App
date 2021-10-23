@@ -1,7 +1,11 @@
 const ProductType = require("../models/ProductType");
 
-exports.getProductTypeById = async (id) => {
+exports.getProductTypeBy_Id = async (id) => {
   try {
+    if (!id) {
+      return "El Id del tipo producto es requerido";
+    }
+
     const productType = await ProductType.findById(id);
 
     if (!productType) {

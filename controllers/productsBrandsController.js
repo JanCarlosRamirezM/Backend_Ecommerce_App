@@ -1,5 +1,4 @@
 const { request, response } = require("express");
-const { getProductBrandById } = require("../helpers/productsBrandsHelpers");
 const ProductBrand = require("../models/ProductBrand");
 
 exports.CreateProductBrand = async (req = request, res = response) => {
