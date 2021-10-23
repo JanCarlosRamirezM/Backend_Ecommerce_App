@@ -1,8 +1,10 @@
 const Products = require("../models/Products");
 
-exports.getProductById = async (id) => {
+exports.getProductBy_Id = async (id) => {
   try {
-    const product = await Products.findById(id);
+    const product = await Products.findById(id)
+      .populate("productType", "name -_id")
+      .populate("productBrand", "name -_id");
 
     if (!product) {
       return "Producto no encontrado";

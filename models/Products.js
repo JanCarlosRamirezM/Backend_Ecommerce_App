@@ -26,13 +26,13 @@ const ProductSchema = Schema({
     default: Date.now(),
   },
 
-  productTypeId: {
+  productType: {
     type: Schema.Types.ObjectId,
     ref: "ProductType",
     required: true,
   },
 
-  productBrandId: {
+  productBrand: {
     type: Schema.Types.ObjectId,
     ref: "ProductBrand",
     required: true,
