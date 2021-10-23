@@ -5,35 +5,37 @@ const types = require("./data/types.json");
 const products = require("./data/products.json");
 const Products = require("../models/Products");
 
-exports.addingSendData = async () => {
-  // 1
-  // dataProductBrands();
-  // 2
-  //  dataProductTypes();
-  // 3
-  // dataProduct();
+exports.addingSendData = () => {
+  const productBrandId = dataProductBrands();
+  const productTypeId = dataProductTypes();
+  dataProduct(productTypeId, productBrandId);
 };
 
 const dataProductBrands = () => {
+  let id;
   brands.map((brand) => {
-    brandNew = new ProductBrand(brand);
+    const brandNew = new ProductBrand(brand);
     brandNew.save();
+    id = brandNew._id;
   });
+
+  return id;
 };
 const dataProductTypes = () => {
+  let id;
   types.map((type) => {
-    typesNew = new ProductType(type);
+    const typesNew = new ProductType(type);
     typesNew.save();
+    id = typesNew._id;
   });
+
+  return id;
 };
 
-const dataProduct = async () => {
-  const productTypeDb = await ProductType.findOne();
-  const ProductBrandDb = await ProductBrand.findOne();
-
+const dataProduct = async (productTypeId_, ProductBrandId_) => {
   products.map((product) => {
-    product.productTypeId = productTypeDb._id;
-    product.productBrandId = ProductBrandDb._id;
+    product.productType = productTypeId_;
+    product.productBrand = ProductBrandId_;
     productNew = new Products(product);
     productNew.save();
   });

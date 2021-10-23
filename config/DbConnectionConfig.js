@@ -9,9 +9,11 @@ const DbConnectionConfig = async () => {
       useUnifiedTopology: true,
     });
     console.log("Database Connected App ");
-    
+
     // Agregar Data a las tablas
-    // addingSendData();
+    if (process.env.AGREGAR_DATA === "true") {
+      await addingSendData();
+    }
   } catch (error) {
     console.log(error);
     process.exit(1);
