@@ -3,9 +3,13 @@ const { isValidObjectId } = require("mongoose");
 const { getProductBrandBy_Id } = require("../helpers/productsBrandsHelpers");
 
 // ---------------------------------------
-// Mover el Id del Encabezado al Body
+// asignar el Id del Encabezado al Cuerpo
 // ---------------------------------------
-exports.assignTheProductBrandIdToTheBody = (req = request, res = response, next) => {
+exports.assignTheProductBrandIdToTheBody = (
+  req = request,
+  res = response,
+  next
+) => {
   const { id } = req.params;
   req.body.productBrand = id;
   return next();
