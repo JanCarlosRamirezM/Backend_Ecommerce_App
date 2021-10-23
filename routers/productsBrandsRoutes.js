@@ -8,6 +8,10 @@ const {
   UpdateProductBrand,
 } = require("../controllers/productsBrandsController");
 const {
+  assignTheProductBrandIdToTheBody,
+  getProductBrandByBodyId,
+} = require("../middleware/productsBrandsMiddleware");
+const {
   showFieldsErrorMiddleware,
 } = require("../middleware/showFieldsErrorMiddleware ");
 
@@ -28,12 +32,24 @@ router.post(
 router.get("/", GetProductsBrands);
 
 //GET: api/productsTypes/id
-router.get("/:id", GetProductBrandById);
+router.get(
+  "/:id",
+  [assignTheProductBrandIdToTheBody, getProductBrandByBodyId],
+  GetProductBrandById
+);
 
 //DELETE: api/productsTypes/id
-router.delete("/:id", DeleteProductBrand);
+router.delete(
+  "/:id",
+  [assignTheProductBrandIdToTheBody, getProductBrandByBodyId],
+  DeleteProductBrand
+);
 
 //PUT: api/productsTypes/id
-router.put("/:id", UpdateProductBrand);
+router.put(
+  "/:id",
+  [assignTheProductBrandIdToTheBody, getProductBrandByBodyId],
+  UpdateProductBrand
+);
 
 module.exports = router;

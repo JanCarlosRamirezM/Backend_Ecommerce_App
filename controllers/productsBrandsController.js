@@ -34,44 +34,19 @@ exports.GetProductsBrands = async (req = request, res = response) => {
 };
 
 exports.GetProductBrandById = async (req = request, res = response) => {
-  try {
-    const { id } = req.params;
-
-    const productBrandResp = await getProductBrandById(id);
-
-    if (!productBrandResp.productBrand) {
-      return res.status(400).json({
-        msg: productBrandResp,
-      });
-    }
-
-    const { productBrand } = productBrandResp;
-    return res.status(200).json(productBrand);
-  } catch (error) {
-    console.log(error);
-    return res.status(400).json({
-      msg: "Hubo un error en el server",
-    });
-  }
+  return res.status(200).json(req.productBrand);
 };
 
 exports.UpdateProductBrand = async (req = request, res = response) => {
   try {
-    const { id } = req.params;
-    const productBrandResp = await getProductBrandById(id);
-
-    if (!productBrandResp.productBrand) {
-      return res.status(400).json({
-        msg: productBrandResp,
-      });
-    }
+    const { _id } = req.productBrand;
 
     const updateProductBrand = {
       name: req.body.name,
     };
 
     const productBrand = await ProductBrand.findByIdAndUpdate(
-      id,
+      _id,
       updateProductBrand,
       {
         new: true,
@@ -89,16 +64,9 @@ exports.UpdateProductBrand = async (req = request, res = response) => {
 
 exports.DeleteProductBrand = async (req = request, res = response) => {
   try {
-    const { id } = req.params;
-    const productBrandResp = await getProductBrandById(id);
+    const { _id } = req.productBrand;
 
-    if (!productBrandResp.productBrand) {
-      return res.status(400).json({
-        msg: productBrandResp,
-      });
-    }
-
-    await ProductBrand.findByIdAndDelete(id);
+    await ProductBrand.findByIdAndDelete(_id);
 
     return res.status(200).json({ msg: "Marca de producto eliminada" });
   } catch (error) {
