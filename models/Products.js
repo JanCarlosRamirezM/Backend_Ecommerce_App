@@ -39,4 +39,27 @@ const ProductSchema = Schema({
   },
 });
 
+ProductSchema.method("toJSON", function () {
+  const { __v, ...object } = this.toObject();
+  // Formatear precio
+  let priceTemp = object.price;
+  if (typeof priceTemp !== "undefined" && priceTemp !== null) {
+    object.price = parseFloat(priceTemp.toString());
+  }
+
+  // Formatear tipo producto
+  let productTypeTemp = object.productType;
+  if (typeof productTypeTemp !== "undefined" && productTypeTemp !== null) {
+    object.productType = productTypeTemp.name;
+  }
+
+  // Formatear marca producto
+  let productBrandTemp = object.productBrand;
+  if (typeof productBrandTemp !== "undefined" && productBrandTemp !== null) {
+    object.productBrand = productBrandTemp.name;
+  }
+
+  return object;
+});
+
 module.exports = model("Product", ProductSchema);

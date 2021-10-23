@@ -41,37 +41,12 @@ exports.GetProducts = async (req = request, res = response) => {
 };
 
 exports.GetProductbyId = async (req = request, res = response) => {
-  try {
-    const { id } = req.params;
-
-    const response = await getProductBy_Id(id);
-
-    if (!response.product) {
-      return res.status(400).json({
-        msg: response,
-      });
-    }
-    const { product } = response;
-    res.status(200).json(product);
-  } catch (error) {
-    console.log(error);
-    return res.status(400).json({
-      msg: "Hubo un error en el server",
-    });
-  }
+  return res.status(200).json(req.product);
 };
 
 exports.UpdateProduct = async (req = request, res = response) => {
   try {
-    const { id } = req.params;
-
-    const response = await getProductBy_Id(id);
-
-    if (!response.product) {
-      return res.status(400).json({
-        msg: response,
-      });
-    }
+    const { _id } = req.product;
 
     const updateProduct = {
       name: req.body.name,
@@ -83,11 +58,26 @@ exports.UpdateProduct = async (req = request, res = response) => {
     };
 
     // Actualizar registro
-    const Product = await Products.findByIdAndUpdate(id, updateProduct, {
+    const Product = await Products.findByIdAndUpdate(_id, updateProduct, {
       new: true,
     });
 
     return res.status(200).json(Product);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      msg: "Hubo un error en el server",
+    });
+  }
+};
+
+exports.DeleteProduct = async (req = request, res = response) => {
+  try {
+    const { _id } = req.product;
+
+    await Products.findByIdAndDelete(_id);
+
+    return res.status(200).json({ msg: "Producto eliminado" });
   } catch (error) {
     console.log(error);
     return res.status(400).json({

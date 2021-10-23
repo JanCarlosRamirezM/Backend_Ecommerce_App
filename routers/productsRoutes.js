@@ -5,10 +5,15 @@ const {
   GetProducts,
   GetProductbyId,
   UpdateProduct,
+  DeleteProduct,
 } = require("../controllers/productsController");
 const {
   getProductBrandByBodyId,
 } = require("../middleware/productsBrandsMiddleware");
+const {
+  assignTheProductIdToTheBody,
+  getProductByBodyId,
+} = require("../middleware/productsMiddleware");
 const {
   getProductTypeByBodyId,
 } = require("../middleware/productsTypesMiddleware");
@@ -40,14 +45,31 @@ router.post(
 router.get("/", GetProducts);
 
 //GET: api/products/id
-router.get("/:id", validateIdMiddleware, GetProductbyId);
+router.get(
+  "/:id",
+  [validateIdMiddleware, assignTheProductIdToTheBody, getProductByBodyId],
+  GetProductbyId
+);
 
 //PUT: api/products/id
 router.put(
   "/:id",
 
-  [validateIdMiddleware, getProductTypeByBodyId, getProductBrandByBodyId],
+  [
+    validateIdMiddleware,
+    assignTheProductIdToTheBody,
+    getProductByBodyId,
+    getProductTypeByBodyId,
+    getProductBrandByBodyId,
+  ],
   UpdateProduct
+);
+
+// DELETE:
+router.delete(
+  "/:id",
+  [validateIdMiddleware, assignTheProductIdToTheBody, getProductByBodyId],
+  DeleteProduct
 );
 
 module.exports = router;
