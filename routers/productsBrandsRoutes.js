@@ -14,6 +14,7 @@ const {
 const {
   showFieldsErrorMiddleware,
 } = require("../middleware/showFieldsErrorMiddleware ");
+const { validateIdMiddleware } = require("../middleware/validateIdMiddleware");
 
 const router = express.Router();
 
@@ -34,21 +35,33 @@ router.get("/", GetProductsBrands);
 //GET: api/productsTypes/id
 router.get(
   "/:id",
-  [assignTheProductBrandIdToTheBody, getProductBrandByBodyId],
+  [
+    validateIdMiddleware,
+    assignTheProductBrandIdToTheBody,
+    getProductBrandByBodyId,
+  ],
   GetProductBrandById
 );
 
 //DELETE: api/productsTypes/id
 router.delete(
   "/:id",
-  [assignTheProductBrandIdToTheBody, getProductBrandByBodyId],
+  [
+    validateIdMiddleware,
+    assignTheProductBrandIdToTheBody,
+    getProductBrandByBodyId,
+  ],
   DeleteProductBrand
 );
 
 //PUT: api/productsTypes/id
 router.put(
   "/:id",
-  [assignTheProductBrandIdToTheBody, getProductBrandByBodyId],
+  [
+    validateIdMiddleware,
+    assignTheProductBrandIdToTheBody,
+    getProductBrandByBodyId,
+  ],
   UpdateProductBrand
 );
 

@@ -8,6 +8,7 @@ const {
 const {
   showFieldsErrorMiddleware,
 } = require("../middleware/showFieldsErrorMiddleware ");
+const { validateIdMiddleware } = require("../middleware/validateIdMiddleware");
 
 const router = express.Router();
 
@@ -28,21 +29,33 @@ router.get("/", productsTypesController.GetProductsTypes);
 //GET: api/productsTypes/id
 router.get(
   "/:id",
-  [assignTheProductTypeIdToTheBody, getProductTypeByBodyId],
+  [
+    validateIdMiddleware,
+    assignTheProductTypeIdToTheBody,
+    getProductTypeByBodyId,
+  ],
   productsTypesController.GetProductTypeById
 );
 
 //DELETE: api/productsTypes/id
 router.delete(
   "/:id",
-  [assignTheProductTypeIdToTheBody, getProductTypeByBodyId],
+  [
+    validateIdMiddleware,
+    assignTheProductTypeIdToTheBody,
+    getProductTypeByBodyId,
+  ],
   productsTypesController.DeleteProductType
 );
 
 //PUT: api/productsTypes/id
 router.put(
   "/:id",
-  [assignTheProductTypeIdToTheBody, getProductTypeByBodyId],
+  [
+    validateIdMiddleware,
+    assignTheProductTypeIdToTheBody,
+    getProductTypeByBodyId,
+  ],
   productsTypesController.UpdateProductType
 );
 

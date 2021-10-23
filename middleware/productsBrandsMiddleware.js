@@ -26,11 +26,9 @@ exports.getProductBrandByBodyId = async (
   try {
     let id = req.body.productBrand;
 
-    // valida que el Id no sea
+    // Si esta en blanco no realizar la busqueda
     if (!id) {
-      return res.status(400).json({
-        msg: "El Id de la marca producto es requerido",
-      });
+      return next();
     }
 
     // validar el Id

@@ -26,11 +26,9 @@ exports.getProductTypeByBodyId = async (
   try {
     let id = req.body.productType;
 
-    // valida que el Id no sea
+    // Si esta en blanco no realizar la busqueda
     if (!id) {
-      return res.status(400).json({
-        msg: "El Id del tipo producto es requerido",
-      });
+      return next();
     }
 
     // validar el Id
